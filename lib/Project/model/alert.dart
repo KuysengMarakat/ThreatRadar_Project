@@ -36,6 +36,7 @@ class Alert{
     required this.status
   });
 
+  @override
   String toString(){
     return "falided Attempt : $failAttempt , risk: $ristLevel";
   }

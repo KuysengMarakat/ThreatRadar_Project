@@ -67,7 +67,8 @@ class _AlertscreenState extends State<Alertscreen> {
     });
   }
 
-void initState() {
+@override
+  void initState() {
   super.initState(); 
   fectData();
 }

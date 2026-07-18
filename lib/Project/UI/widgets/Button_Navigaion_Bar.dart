@@ -14,8 +14,8 @@ class bottomNavigationBarWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-
-
+        
+        
             GestureDetector(
               onTap: onHome,
               child: Container(

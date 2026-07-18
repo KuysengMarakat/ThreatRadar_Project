@@ -10,6 +10,7 @@ class Log{
 
   Log({required this.action,required this.device,required this.email,required this.ip,required this.time,required this.websiteID});
 
+  @override
   String toString(){
     return "action : $action , email: $email , ip : $ip";
   }

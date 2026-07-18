@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Project/UI/AlertDetailScreen.dart';
+import 'package:my_app/Project/UI/Screen/AlertDetailScreen.dart';
 import 'package:my_app/Project/model/alert.dart';
 
 class Alertcard extends StatefulWidget {

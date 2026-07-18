@@ -68,17 +68,17 @@ class _AlertdetailscreenState extends State<Alertdetailscreen> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 255, 64, 64),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
                         child: Text(
                           "High",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
-                        ),
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 64, 64),
-                          borderRadius: BorderRadius.circular(15),
                         ),
                       ),
                     ],

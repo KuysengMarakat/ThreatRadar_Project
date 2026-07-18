@@ -54,7 +54,7 @@ class ResposityAlert {
 
   Future<void> createAlert(Alert alert, int id) async {
     Uri url = Uri.parse(
-      "https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/Alert/alert_00${id}.json",
+      "https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/Alert/alert_00$id.json",
     );
 
     Map<String, dynamic> body = AlertDto.toJson(alert);
