@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Project/UI/Screen/AlertDetailScreen.dart';
-import 'package:my_app/Project/model/alert.dart';
+import 'package:my_app/UI/Screen/AlertDetailScreen.dart';
+import 'package:my_app/model/alert.dart';
+
 
 class Alertcard extends StatefulWidget {
   Alertcard({super.key ,required this.alert});

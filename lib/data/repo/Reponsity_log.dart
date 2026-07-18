@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
-import 'package:my_app/Project/data/DTO/logDto.dart';
-import 'package:my_app/Project/model/log.dart';
+import 'package:my_app/data/DTO/logDto.dart';
+import 'package:my_app/model/log.dart';
 
 void main() async {
   ReponsityLog global = ReponsityLog.global;

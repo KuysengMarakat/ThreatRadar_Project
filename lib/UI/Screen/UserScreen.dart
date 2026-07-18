@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Project/UI/Screen/AlertScreen.dart';
-import 'package:my_app/Project/UI/widgets/Button_Navigaion_Bar.dart';
-import 'package:my_app/Project/UI/widgets/app_Bar.dart';
+import 'package:my_app/UI/Screen/AlertScreen.dart';
+import 'package:my_app/UI/widgets/Button_Navigaion_Bar.dart';
+import 'package:my_app/UI/widgets/app_Bar.dart';
+
 
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});

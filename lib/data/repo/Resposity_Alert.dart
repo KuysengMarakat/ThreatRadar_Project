@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
-import 'package:my_app/Project/data/DTO/alertDto.dart';
-import 'package:my_app/Project/model/alert.dart';
+import 'package:my_app/data/DTO/alertDto.dart';
+import 'package:my_app/model/alert.dart';
+
 
 void main() async {
   ResposityAlert global = ResposityAlert.global;

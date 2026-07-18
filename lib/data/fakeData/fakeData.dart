@@ -1,5 +1,6 @@
-import 'package:my_app/Project/model/alert.dart';
-import 'package:my_app/Project/model/log.dart';
+
+import 'package:my_app/model/alert.dart';
+import 'package:my_app/model/log.dart';
 
 List<Log> fakeLogs = [
     Log(

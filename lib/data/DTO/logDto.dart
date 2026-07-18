@@ -1,5 +1,6 @@
 
-import 'package:my_app/Project/model/log.dart';
+
+import 'package:my_app/model/log.dart';
 
 class Logdto {
   static const String action = "action";

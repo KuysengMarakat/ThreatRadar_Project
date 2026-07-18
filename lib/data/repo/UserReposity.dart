@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
-import 'package:my_app/Project/data/DTO/UserDto.dart';
-import 'package:my_app/Project/model/user.dart';
+import 'package:my_app/data/DTO/UserDto.dart';
+import 'package:my_app/model/user.dart';
+
 
 // void main() async {
   

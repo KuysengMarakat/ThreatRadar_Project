@@ -2,9 +2,10 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:my_app/Project/UI/Screen/LoginScreen.dart';
-import 'package:my_app/Project/UI/Screen/UserScreen.dart';
-import 'package:my_app/Project/data/repo/UserReposity.dart';
+import 'package:my_app/UI/Screen/LoginScreen.dart';
+import 'package:my_app/UI/Screen/UserScreen.dart';
+import 'package:my_app/data/repo/UserReposity.dart';
+
 
 
 class Appscreen extends StatefulWidget {

@@ -1,4 +1,6 @@
-import 'package:my_app/Project/model/alert.dart';
+
+
+import 'package:my_app/model/alert.dart';
 
 class AlertDto {
   static const String user = "affectedUser";

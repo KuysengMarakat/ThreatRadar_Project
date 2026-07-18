@@ -1,6 +1,8 @@
-import 'package:my_app/Project/data/fakeData/fakeData.dart';
-import 'package:my_app/Project/data/repo/Resposity_Alert.dart';
-import 'package:my_app/Project/model/alert.dart';
+
+
+import 'package:my_app/data/fakeData/fakeData.dart';
+import 'package:my_app/data/repo/Resposity_Alert.dart';
+import 'package:my_app/model/alert.dart';
 
 void main() {
   BruteForceRule();

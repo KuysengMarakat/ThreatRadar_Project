@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Project/UI/Card/AlertCard.dart';
-import 'package:my_app/Project/UI/widgets/Button_Navigaion_Bar.dart';
-import 'package:my_app/Project/UI/widgets/app_Bar.dart';
-import 'package:my_app/Project/UI/widgets/filter.dart';
-import 'package:my_app/Project/data/Service/alert_filter.dart';
-import 'package:my_app/Project/data/fakeData/fakeData.dart';
-import 'package:my_app/Project/data/repo/Resposity_Alert.dart';
-import 'package:my_app/Project/model/alert.dart';
+import 'package:my_app/UI/Card/AlertCard.dart';
+import 'package:my_app/UI/widgets/filter.dart';
+import 'package:my_app/data/Service/alert_filter.dart';
+import 'package:my_app/data/repo/Resposity_Alert.dart';
+import 'package:my_app/model/alert.dart';
+
 
 void main() {
   runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Alertscreen()));

@@ -1,4 +1,6 @@
-import 'package:my_app/Project/model/user.dart';
+
+
+import 'package:my_app/model/user.dart';
 
 class UserDto {
   static User fromJson(Map<String, dynamic> json) {
