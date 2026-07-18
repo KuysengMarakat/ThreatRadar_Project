@@ -1,10 +1,10 @@
 
 class User {
-  final String? email;
-  final String? password;
-  final String? name;
-  final String? role;
-  final DateTime? createdAt;
+  final String email;
+  final String password;
+  final String name;
+  final String role;
+  final DateTime createdAt;
   
   User({
     required this.email,

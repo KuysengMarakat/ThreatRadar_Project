@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/UI/Screen/AlertScreen.dart';
+import 'package:my_app/UI/Screen/WebsiteScreen.dart';
 import 'package:my_app/UI/widgets/Button_Navigaion_Bar.dart';
 import 'package:my_app/UI/widgets/app_Bar.dart';
-
 
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
@@ -49,7 +49,7 @@ class _UserScreenState extends State<UserScreen> {
         return Center(child: Text("hello"));
 
       case AsynState.Website:
-        return Center(child: Text("Wesite"));
+        return WebsiteScreen();
 
       case AsynState.Profile:
         return Center(child: Text("Profile"));
@@ -60,6 +60,13 @@ class _UserScreenState extends State<UserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.white, title: AppBarWidget()),
+      floatingActionButton:  asynState == AsynState.Website ? FloatingActionButton(
+       shape: CircleBorder(),
+        onPressed: () => {},
+        backgroundColor: Colors.green,
+        foregroundColor: Colors.white,
+        child: Icon(Icons.add),
+      ) : null,
       backgroundColor: Color(0xFF260304),
       body: Content,
       bottomNavigationBar: bottomNavigationBarWidget(
@@ -71,3 +78,4 @@ class _UserScreenState extends State<UserScreen> {
     );
   }
 }
+

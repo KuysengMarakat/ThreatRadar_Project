@@ -69,6 +69,7 @@ class UserReposity {
        User userTest = UserDto.fromJson(value);
        user = userTest;
        print(user);
+       
       }
     }
    

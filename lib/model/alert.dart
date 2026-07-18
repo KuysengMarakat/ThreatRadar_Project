@@ -16,14 +16,14 @@ enum RiskLevel{
 }
 
 class Alert{
-  final String? websiteId;
-  final ThreatType? threatType;
-  final Status? status;
-  final String? title;
-  final String? user;
-  final int? failAttempt;
-  final RiskLevel? ristLevel;
-  final DateTime? detectAt;
+  final String websiteId;
+  final ThreatType threatType;
+  final Status status;
+  final String title;
+  final String user;
+  final int failAttempt;
+  final RiskLevel ristLevel;
+  final DateTime detectAt;
 
   Alert({
      required this.websiteId,
