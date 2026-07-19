@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/UI/Screen/AddWebsiteScreen.dart';
 import 'package:my_app/UI/Screen/AlertScreen.dart';
+import 'package:my_app/UI/Screen/HomeScreen.dart';
 import 'package:my_app/UI/Screen/ProfileScreen.dart';
 import 'package:my_app/UI/Screen/WebsiteScreen.dart';
 import 'package:my_app/UI/widgets/Button_Navigaion_Bar.dart';
@@ -47,46 +49,7 @@ class _UserScreenState extends State<UserScreen> {
         return Alertscreen();
 
       case AsynState.Home:
-        return Center(
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'No website selected',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 12),
-
-                Text(
-                  'Please select a website to \n start monitoring threats',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white54, fontSize: 14),
-                ),
-                SizedBox(height: 24),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    foregroundColor: Colors.white,
-                  ),
-                  onPressed: () => {}, 
-                  child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: .center,
-                    children: [
-                      Icon(Icons.add),
-                      Text("Select Webiste"),
-                    ],
-                  )),
-              ],
-            ),
-          ),
-        );
+        return NoWebsiteScreen();
 
       case AsynState.Website:
         return WebsiteScreen();
@@ -94,6 +57,10 @@ class _UserScreenState extends State<UserScreen> {
       case AsynState.Profile:
         return Profilescreen();
     }
+  }
+  
+  void OnAddWeb(){
+    Navigator.push(context,MaterialPageRoute(builder: (context)=> Addwebsitescreen()));
   }
 
   @override
@@ -105,7 +72,7 @@ class _UserScreenState extends State<UserScreen> {
       floatingActionButton: asynState == AsynState.Website
           ? FloatingActionButton(
               shape: CircleBorder(),
-              onPressed: () => {},
+              onPressed: OnAddWeb,
               backgroundColor: Colors.green,
               foregroundColor: Colors.white,
               child: Icon(Icons.add),
