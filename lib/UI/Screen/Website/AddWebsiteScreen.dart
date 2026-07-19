@@ -85,11 +85,6 @@ class _AddwebsitescreenState extends State<Addwebsitescreen> {
 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red[700],
-
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 40,
-                    vertical: 14,
-                  ),
                 ),
 
                 child:  Text(

@@ -2,8 +2,8 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:my_app/UI/Screen/LoginScreen.dart';
-import 'package:my_app/UI/Screen/UserScreen.dart';
+import 'package:my_app/UI/Screen/auth/LoginScreen.dart';
+import 'package:my_app/UI/Screen/auth/UserScreen.dart';
 import 'package:my_app/data/repo/UserReposity.dart';
 
 

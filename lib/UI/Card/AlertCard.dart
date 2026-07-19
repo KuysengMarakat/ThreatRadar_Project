@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/UI/Screen/AlertDetailScreen.dart';
+import 'package:my_app/UI/Screen/Alert/AlertDetailScreen.dart';
 import 'package:my_app/model/alert.dart';
 
 

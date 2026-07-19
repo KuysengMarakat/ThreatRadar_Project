@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/UI/Screen/AddWebsiteScreen.dart';
-import 'package:my_app/UI/Screen/AlertScreen.dart';
+import 'package:my_app/UI/Screen/Website/AddWebsiteScreen.dart';
+import 'package:my_app/UI/Screen/Alert/AlertScreen.dart';
 import 'package:my_app/UI/Screen/HomeScreen.dart';
-import 'package:my_app/UI/Screen/ProfileScreen.dart';
-import 'package:my_app/UI/Screen/WebsiteScreen.dart';
+import 'package:my_app/UI/Screen/Profile/ProfileScreen.dart';
+import 'package:my_app/UI/Screen/Website/WebsiteScreen.dart';
 import 'package:my_app/UI/widgets/Button_Navigaion_Bar.dart';
 import 'package:my_app/UI/widgets/app_Bar.dart';
 
@@ -17,7 +17,7 @@ class UserScreen extends StatefulWidget {
 enum AsynState { Home, Alert, Website, Profile }
 
 class _UserScreenState extends State<UserScreen> {
-  AsynState asynState = AsynState.Home;
+  AsynState asynState = AsynState.Profile;
 
   void onHome() {
     setState(() {
@@ -66,9 +66,7 @@ class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: asynState == AsynState.Profile
-          ? null
-          : AppBar(backgroundColor: Colors.white, title: AppBarWidget()),
+      appBar: AppBar(backgroundColor: Colors.white, title: AppBarWidget()),
       floatingActionButton: asynState == AsynState.Website
           ? FloatingActionButton(
               shape: CircleBorder(),
