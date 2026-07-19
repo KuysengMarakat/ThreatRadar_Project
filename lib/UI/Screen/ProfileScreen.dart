@@ -65,7 +65,7 @@ class _ProfilescreenState extends State<Profilescreen> {
               SizedBox(height: 30),
 
               Padding(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(10),
                 child: Container(
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
@@ -107,6 +107,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                 ),
                 
               ),
+              
             ],
           ),
         );;
