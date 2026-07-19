@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/UI/Screen/AlertScreen.dart';
+import 'package:my_app/UI/Screen/ProfileScreen.dart';
 import 'package:my_app/UI/Screen/WebsiteScreen.dart';
 import 'package:my_app/UI/widgets/Button_Navigaion_Bar.dart';
 import 'package:my_app/UI/widgets/app_Bar.dart';
@@ -14,7 +15,7 @@ class UserScreen extends StatefulWidget {
 enum AsynState { Home, Alert, Website, Profile }
 
 class _UserScreenState extends State<UserScreen> {
-  AsynState asynState = AsynState.Alert;
+  AsynState asynState = AsynState.Profile;
 
   void onHome() {
     setState(() {
@@ -52,21 +53,25 @@ class _UserScreenState extends State<UserScreen> {
         return WebsiteScreen();
 
       case AsynState.Profile:
-        return Center(child: Text("Profile"));
+        return Profilescreen();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.white, title: AppBarWidget()),
-      floatingActionButton:  asynState == AsynState.Website ? FloatingActionButton(
-       shape: CircleBorder(),
-        onPressed: () => {},
-        backgroundColor: Colors.green,
-        foregroundColor: Colors.white,
-        child: Icon(Icons.add),
-      ) : null,
+      appBar: asynState == AsynState.Profile
+          ? null
+          : AppBar(backgroundColor: Colors.white, title: AppBarWidget()),
+      floatingActionButton: asynState == AsynState.Website
+          ? FloatingActionButton(
+              shape: CircleBorder(),
+              onPressed: () => {},
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.white,
+              child: Icon(Icons.add),
+            )
+          : null,
       backgroundColor: Color(0xFF260304),
       body: Content,
       bottomNavigationBar: bottomNavigationBarWidget(
@@ -79,3 +84,9 @@ class _UserScreenState extends State<UserScreen> {
   }
 }
 
+void main() {
+  runApp(MaterialApp
+  
+  (debugShowCheckedModeBanner: false,
+    home: UserScreen()));
+}
