@@ -6,9 +6,9 @@ import 'package:my_app/data/repo/Resposity_Alert.dart';
 import 'package:my_app/model/alert.dart';
 
 
-void main() {
-  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Alertscreen()));
-}
+// void main() {
+//   runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Alertscreen()));
+// }
 
 class Alertscreen extends StatefulWidget {
   const Alertscreen({super.key});
@@ -19,7 +19,9 @@ class Alertscreen extends StatefulWidget {
 
 enum FilterType { All, High, Meduim, Critical }
 
+
 enum Asynstate { Loading, Successful, Error }
+
 
 class _AlertscreenState extends State<Alertscreen> {
 
@@ -125,7 +127,6 @@ class _AlertscreenState extends State<Alertscreen> {
         ),
       );
 
-   
     
   }
 }
