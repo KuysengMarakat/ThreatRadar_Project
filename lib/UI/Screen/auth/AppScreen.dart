@@ -30,7 +30,7 @@ class _AppscreenState extends State<Appscreen> {
   Widget get content{
     bool isLoggin = global.isLoggin;
     if(isLoggin){
-      return UserScreen();
+      return UserScreen(user: global);
     }else{
       return Loginscreen(onLogin: onLogin,user: global,);
     }

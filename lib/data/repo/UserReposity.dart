@@ -50,13 +50,11 @@ class UserReposity {
 
   Future<void> Login({required String email, required String password}) async {
     Uri url = Uri.parse(
-      "https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/users/Users.json",
+      "https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/users/users/Users.json",
     );
     Response response = await http.get(url);
     Map<String, dynamic> jsons = jsonDecode(response.body);
  
-
-    
 
     for (var entry in jsons.entries) {
 

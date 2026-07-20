@@ -6,9 +6,11 @@ import 'package:my_app/UI/Screen/Profile/ProfileScreen.dart';
 import 'package:my_app/UI/Screen/Website/WebsiteScreen.dart';
 import 'package:my_app/UI/widgets/Button_Navigaion_Bar.dart';
 import 'package:my_app/UI/widgets/app_Bar.dart';
+import 'package:my_app/data/repo/UserReposity.dart';
 
 class UserScreen extends StatefulWidget {
-  const UserScreen({super.key});
+  UserScreen({super.key, required this.user});
+  UserReposity user;
 
   @override
   State<UserScreen> createState() => _UserScreenState();
@@ -17,7 +19,7 @@ class UserScreen extends StatefulWidget {
 enum AsynState { Home, Alert, Website, Profile }
 
 class _UserScreenState extends State<UserScreen> {
-  AsynState asynState = AsynState.Profile;
+  AsynState asynState = AsynState.Home;
 
   void onHome() {
     setState(() {
@@ -42,14 +44,18 @@ class _UserScreenState extends State<UserScreen> {
       asynState = AsynState.Profile;
     });
   }
+  
 
   Widget get Content {
     switch (asynState) {
       case AsynState.Alert:
+        if(widget.user.selectedWebsite == null){
+          return NoWebsiteScreen(onSelect: onWebsite,);
+        }
         return Alertscreen();
 
       case AsynState.Home:
-        return NoWebsiteScreen();
+        return NoWebsiteScreen(onSelect: onWebsite,);
 
       case AsynState.Website:
         return WebsiteScreen();
@@ -88,6 +94,3 @@ class _UserScreenState extends State<UserScreen> {
   }
 }
 
-void main() {
-  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: UserScreen()));
-}

@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 
 class NoWebsiteScreen extends StatelessWidget {
-  const NoWebsiteScreen({super.key});
+  NoWebsiteScreen({super.key,required this.onSelect});
+  VoidCallback onSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class NoWebsiteScreen extends StatelessWidget {
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
                   ),
-                  onPressed: () => {}, 
+                  onPressed: onSelect, 
                   child: Row(
                   mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: .center,
