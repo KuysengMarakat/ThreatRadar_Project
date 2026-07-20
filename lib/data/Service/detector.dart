@@ -13,6 +13,8 @@ class Detector {
   Future<void> BruteForceRule() async {
     List<Alert> result = await alertRepo.getAllAlert();
     List<Log> AllLog = await Logrepo.getAllLog();
+    print(" 📊 Total alerts: ${result.length}");
+    print(" 📊 Total logs: ${AllLog.length}");
 
     int alertId = result.length + 1;
 
@@ -233,7 +235,12 @@ class Detector {
 
       yield null;
 
-      await Future.delayed(Duration(seconds: 3));
+      await Future.delayed(Duration(minutes: 5));
     }
   }
+}
+void main() async {
+
+await Detector.global.BruteForceRule();
+
 }
