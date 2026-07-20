@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 
-class NoWebsiteScreen extends StatelessWidget {
-  NoWebsiteScreen({super.key,required this.onSelect});
+class NoWebisteCard extends StatelessWidget {
+  NoWebisteCard({super.key,required this.onSelect});
   VoidCallback onSelect;
 
   @override

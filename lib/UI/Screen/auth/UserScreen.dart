@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/UI/Card/HomeCard.dart';
 import 'package:my_app/UI/Screen/Website/AddWebsiteScreen.dart';
 import 'package:my_app/UI/Screen/Alert/AlertScreen.dart';
-import 'package:my_app/UI/Screen/HomeScreen.dart';
+import 'package:my_app/UI/Card/HomeScreen.dart';
 import 'package:my_app/UI/Screen/Profile/ProfileScreen.dart';
 import 'package:my_app/UI/Screen/Website/WebsiteScreen.dart';
 import 'package:my_app/UI/widgets/Button_Navigaion_Bar.dart';
 import 'package:my_app/UI/widgets/app_Bar.dart';
 import 'package:my_app/data/repo/UserReposity.dart';
+import 'package:my_app/model/web.dart';
 
 class UserScreen extends StatefulWidget {
   UserScreen({super.key, required this.user});
@@ -20,6 +22,16 @@ enum AsynState { Home, Alert, Website, Profile }
 
 class _UserScreenState extends State<UserScreen> {
   AsynState asynState = AsynState.Home;
+
+  List<Website> allWeb = [
+    Website(
+      id: "site_001",
+      name: "KhmerCharm",
+      url: "https://network-design-project.vercel.app/",
+      status: "active",
+      addTime: DateTime.parse("2026-07-07T21:00:00.000Z"),
+    ),
+  ];
 
   void onHome() {
     setState(() {
@@ -44,29 +56,39 @@ class _UserScreenState extends State<UserScreen> {
       asynState = AsynState.Profile;
     });
   }
-  
 
   Widget get Content {
     switch (asynState) {
       case AsynState.Alert:
-        if(widget.user.selectedWebsite == null){
-          return NoWebsiteScreen(onSelect: onWebsite,);
+        if (widget.user.selectedWebsite == null) {
+          return NoWebisteCard(onSelect: onWebsite);
         }
-        return Alertscreen(user: widget.user,);
+        return Alertscreen(user: widget.user);
 
       case AsynState.Home:
-        return NoWebsiteScreen(onSelect: onWebsite,);
+        if (widget.user.selectedWebsite == null) {
+          return NoWebisteCard(onSelect: onWebsite);
+        }
+        return HomeCard(
+          website: allWeb[0],
+          unresolvedAlerts: 1,
+          onViewAlerts: () => {},
+          onSwitchWebsite: () => {},
+        );
 
       case AsynState.Website:
-        return WebsiteScreen(user:widget.user,);
+        return WebsiteScreen(user: widget.user);
 
       case AsynState.Profile:
         return Profilescreen();
     }
   }
-  
-  void OnAddWeb(){
-    Navigator.push(context,MaterialPageRoute(builder: (context)=> Addwebsitescreen()));
+
+  void OnAddWeb() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Addwebsitescreen()),
+    );
   }
 
   @override
@@ -93,4 +115,3 @@ class _UserScreenState extends State<UserScreen> {
     );
   }
 }
-
