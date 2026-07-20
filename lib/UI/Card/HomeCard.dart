@@ -22,6 +22,7 @@ class HomeCard extends StatelessWidget {
     bool isActive = website.status == "active";
     
     return Container(
+      margin: EdgeInsets.all(20),
       width: double.infinity,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -32,7 +33,6 @@ class HomeCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           
-          // Website Info Row
           Row(
             children: [
               CircleAvatar(

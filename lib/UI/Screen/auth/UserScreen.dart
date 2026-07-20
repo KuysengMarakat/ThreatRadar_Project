@@ -72,8 +72,8 @@ class _UserScreenState extends State<UserScreen> {
         return HomeCard(
           website: allWeb[0],
           unresolvedAlerts: 1,
-          onViewAlerts: () => {},
-          onSwitchWebsite: () => {},
+          onViewAlerts: onAlert,
+          onSwitchWebsite: onWebsite,
         );
 
       case AsynState.Website:
