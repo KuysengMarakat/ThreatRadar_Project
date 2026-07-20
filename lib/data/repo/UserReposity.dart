@@ -25,7 +25,7 @@ import 'package:my_app/model/user.dart';
 
 class UserReposity {
   static UserReposity instance = UserReposity();
-  
+  String? selectedWebsite;
   User? user;
   bool get isLoggin => null != user;
 

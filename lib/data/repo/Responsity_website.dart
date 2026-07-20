@@ -56,12 +56,16 @@ class ResponsityWebsite {
   Stream<List<Website>> streamWebsite() async* {
     while (true) {
       yield await getAllWebsite();
-      await Future.delayed(Duration(seconds: 3));
+      await Future.delayed(Duration(seconds: 2));
     }
   }
 
-  Future<bool> addWebsite({required String name,required String websiteUrl,required String siteId,}) async {
+  Future<bool> addWebsite({required String name,required String websiteUrl,}) async {
     String status = "faild";
+    List<Website> allWebsites = await getAllWebsite();
+    int newNumber = allWebsites.length + 1;
+    String siteId = "site_00$newNumber";
+
     Uri firebaseUrl = Uri.parse(
       "https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/Websites/$siteId.json",
     );

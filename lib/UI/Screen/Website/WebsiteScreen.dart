@@ -23,18 +23,38 @@ class _WebsiteScreenState extends State<WebsiteScreen> {
     fetchData();
   }
 
-  void fetchData() async {
-    state = Asynstate.Loading;
-    setState(() {});
+  // void fetchData() async {
+  //   state = Asynstate.Loading;
+  //   setState(() {});
 
-    try {
-      allWeb = await responsityWebsite.getAllWebsite();
-      setState(() {
-        state = Asynstate.Successful;
-      });
-    } catch (e) {
-      state = Asynstate.Error;
-    }
+  //   try {
+  //     allWeb = await responsityWebsite.getAllWebsite();
+  //     setState(() {
+  //       state = Asynstate.Successful;
+  //     });
+  //   } catch (e) {
+  //     state = Asynstate.Error;
+  //   }
+  // }
+  void fetchData () async{
+    state = Asynstate.Loading;
+    setState(() {
+      
+    });
+
+    responsityWebsite.streamWebsite().listen(
+      (Website){
+        setState(() {
+          allWeb =Website;
+          state =Asynstate.Successful;
+        });
+      },
+      onError: (error){
+        setState(() {
+          state = Asynstate.Error;
+        });
+      }
+    );
   }
 
   Widget get content {
