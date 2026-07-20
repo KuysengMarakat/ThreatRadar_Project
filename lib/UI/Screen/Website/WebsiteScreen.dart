@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_app/UI/Card/Websitecard.dart';
+import 'package:my_app/data/repo/Responsity_website.dart';
+import 'package:my_app/model/web.dart';
 
 class WebsiteScreen extends StatefulWidget {
   const WebsiteScreen({super.key});
@@ -8,44 +10,54 @@ class WebsiteScreen extends StatefulWidget {
   State<WebsiteScreen> createState() => _WebsiteScreenState();
 }
 
+enum Asynstate { Loading, Successful, Error }
+
 class _WebsiteScreenState extends State<WebsiteScreen> {
+  ResponsityWebsite responsityWebsite = ResponsityWebsite.instance;
+  List<Website> allWeb = [];
+  Asynstate state = Asynstate.Loading;
+
+  void initState() {
+    super.initState();
+
+    fetchData();
+  }
+
+  void fetchData() async {
+    state = Asynstate.Loading;
+    setState(() {});
+
+    try {
+      allWeb = await responsityWebsite.getAllWebsite();
+      setState(() {
+        state = Asynstate.Successful;
+      });
+    } catch (e) {
+      state = Asynstate.Error;
+    }
+  }
+
+  Widget get content {
+    switch (state) {
+      case Asynstate.Loading:
+        return Center(child: CircularProgressIndicator());
+
+      case Asynstate.Successful:
+        return Padding(
+          padding: EdgeInsets.all(20),
+          child: ListView.builder(
+            itemCount: allWeb.length,
+            itemBuilder: (context, index) => WebsiteCard(website: allWeb[index],),
+          ),
+        );
+      case Asynstate.Error:
+        return Center(child: Text("Error"));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Container(
-            height: 100,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Center(
-              child: ListTile(
-                leading: CircleAvatar(
-                  radius: 45,
-                  backgroundColor: Colors.amber,
-                ),
-                title: Text("Website Name"),
-                trailing: Container(
-                  width: 60,
-                  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.green,
-                  ),
-                  child: Text(
-                    "Safe",
-                    style: TextStyle(color: Colors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+    return content;
   }
 }
+

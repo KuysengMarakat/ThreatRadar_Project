@@ -19,7 +19,7 @@ class UserDto {
       "password": user.password,
       "name": user.name,
       "role": user.role,
-      "createdAt": user.createdAt?.toString(),
+      "createdAt": user.createdAt.toString(),
     };
   }
 }

@@ -8,25 +8,26 @@ import 'package:my_app/model/alert.dart';
 
 void main() async {
   ResposityAlert global = ResposityAlert.global;
-  List<Alert> result = await global.getAllAlert();
-  print(result);
+  //  await global.Update(id: 2, status: Status.Inprogress);
+  // print(result);
 
   Alert alert = Alert(
     websiteId: "1",
     threatType: ThreatType.BruteForce,
-    title: "3",
+    title: "DDOS",
     failAttempt: 5,
     ristLevel: RiskLevel.Critical,
-    user: "6",
+    user: "U@gmail.com",
     detectAt: DateTime.now(),
     status: Status.New,
   );
 
-  await global.createAlert(alert, 2);
+  await global.createAlert(alert, 0);
 }
 
 class ResposityAlert {
   static final ResposityAlert global = ResposityAlert();
+
   Future<List<Alert>> getAllAlert() async {
     Uri url = Uri.parse(
       "https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/Alert.json",
@@ -46,12 +47,15 @@ class ResposityAlert {
   }
 
   Stream<List<Alert>> streamAlert() async* {
-    while (true) {
+  while (true) {
+    try {
       yield await getAllAlert();
-
-      await Future.delayed(Duration(seconds: 3));
+    } catch (e) {
+      throw Exception("Failed: $e");
     }
+    await Future.delayed(Duration(seconds: 1));
   }
+}
 
   Future<void> createAlert(Alert alert, int id) async {
     Uri url = Uri.parse(
@@ -65,5 +69,18 @@ class ResposityAlert {
       headers: {"Content-Type": "application/json"},
       body: jsonEncode(body),
     );
+  }
+
+  Future<void> Update({required int id ,required Status status}) async{
+    Uri url = Uri.parse("https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/Alert/alert_00${id}.json");
+
+    Response response = await http.patch(
+      url,
+      headers: {"content-type":"application/json"},
+      body: jsonEncode({
+        "status": status.name
+      })
+    );
+
   }
 }

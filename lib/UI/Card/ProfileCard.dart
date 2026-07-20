@@ -15,7 +15,7 @@ class ProfileCard extends StatelessWidget {
                 color: Color.fromARGB(255, 112, 14, 5),
               ),
               child: Padding(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(10),
                 child: Row(
                   children: [
                     CircleAvatar(backgroundColor: Colors.white, maxRadius: 55),

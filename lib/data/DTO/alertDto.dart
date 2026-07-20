@@ -48,9 +48,9 @@ class AlertDto {
       "affectedUser": alert.user,
       "detectedAt": alert.detectAt.toString(),
       "failedAttempts": alert.failAttempt,
-      "riskLevel": alert.ristLevel!.name,
-      "status": alert.status!.name,
-      "threatType": alert.threatType!.name,
+      "riskLevel": alert.ristLevel.name,
+      "status": alert.status.name,
+      "threatType": alert.threatType.name,
       "title": alert.title,
       "websiteId": alert.websiteId,
     };

@@ -5,7 +5,6 @@ import 'package:my_app/data/Service/alert_filter.dart';
 import 'package:my_app/data/repo/Resposity_Alert.dart';
 import 'package:my_app/model/alert.dart';
 
-
 // void main() {
 //   runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Alertscreen()));
 // }
@@ -19,12 +18,9 @@ class Alertscreen extends StatefulWidget {
 
 enum FilterType { All, High, Meduim, Critical }
 
-
 enum Asynstate { Loading, Successful, Error }
 
-
 class _AlertscreenState extends State<Alertscreen> {
-
   ResposityAlert resposityAlert = ResposityAlert.global;
 
   AlertFilter alertFilter = AlertFilter.alertFilterGlobal;
@@ -39,7 +35,7 @@ class _AlertscreenState extends State<Alertscreen> {
     List<Alert> result = await alertFilter.Allfilter();
     setState(() {
       filterType = FilterType.All;
-      filter = result ;
+      filter = result;
     });
   }
 
@@ -51,7 +47,7 @@ class _AlertscreenState extends State<Alertscreen> {
     });
   }
 
-  void onHigh() async{
+  void onHigh() async {
     List<Alert> result = await alertFilter.Highfilter();
     setState(() {
       filterType = FilterType.High;
@@ -67,28 +63,30 @@ class _AlertscreenState extends State<Alertscreen> {
     });
   }
 
-@override
+  @override
   void initState() {
-  super.initState(); 
-  fectData();
-}
-
-  void fectData() async{
-    asynState =Asynstate.Loading;
-    setState(() {
-      
-    });
-    try{
-      filter = await resposityAlert.getAllAlert();
-      setState(() {
-        asynState = Asynstate.Successful;
-      });
-    }catch (e){
-      throw Exception(e);
-    }
+    super.initState();
+    fectData();
   }
 
+  void fectData() {
+    asynState = Asynstate.Loading;
+    setState(() {});
 
+    resposityAlert.streamAlert().listen(
+      (alerts) {
+        setState(() {
+          filter = alerts;
+          asynState = Asynstate.Successful;
+        });
+      },
+      onError: (error) {
+        setState(() {
+          asynState = Asynstate.Error;
+        });
+      },
+    );
+  }
 
   Widget get content {
     switch (asynState) {
@@ -98,38 +96,29 @@ class _AlertscreenState extends State<Alertscreen> {
       case Asynstate.Successful:
         return ListView.builder(
           itemCount: filter.length,
-          itemBuilder: (context, index) => Alertcard(alert: filter[index]),
+          itemBuilder: (context, index) => Alertcard(alert: filter[index],index: index,),
         );
       case Asynstate.Error:
-        return Center(
-          child: Text("Can't Fectch Data"),
-        );
+        return Center(child: Text("Can't Fectch Data"));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            filterWidget(
-              onAll: onAll,
-              onHigh: onHigh,
-              onMeduim: onMeduim,
-              onCritical: onCritical,
-            ),
+    return Padding(
+      padding: EdgeInsets.all(20),
+      child: Column(
+        children: [
+          filterWidget(
+            onAll: onAll,
+            onHigh: onHigh,
+            onMeduim: onMeduim,
+            onCritical: onCritical,
+          ),
 
-            Expanded(
-              child: content,
-            ),
-          ],
-        ),
-      );
-
-    
+          Expanded(child: content),
+        ],
+      ),
+    );
   }
 }
-
-
-

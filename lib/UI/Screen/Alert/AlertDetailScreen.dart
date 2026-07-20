@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 
-import 'package:intl/intl.dart';
 import 'package:my_app/UI/Card/AlertDetailCard.dart';
+import 'package:my_app/data/repo/Resposity_Alert.dart';
+import 'package:my_app/model/alert.dart';
 
-void main() {
-  runApp(
-    MaterialApp(debugShowCheckedModeBanner: false, home: Alertdetailscreen()),
-  );
-}
+// void main() {
+//   runApp(
+//     MaterialApp(debugShowCheckedModeBanner: false, home: Alertdetailscreen()),
+//   );
+// }
 
 class Alertdetailscreen extends StatefulWidget {
-  const Alertdetailscreen({super.key});
+  Alertdetailscreen({super.key, required this.alert, required this.index});
+  final Alert alert;
+  final int index;
 
   @override
   State<Alertdetailscreen> createState() => _AlertdetailscreenState();
 }
 
 class _AlertdetailscreenState extends State<Alertdetailscreen> {
-  void onResolve() {
+  ResposityAlert repo = ResposityAlert.global;
+  void onResolve() async {
+    await repo.Update(id: widget.index, status: Status.Resolve);
     Navigator.pop(context);
   }
 
-  void onInprogress() {
+  void onInprogress() async {
+    await repo.Update(id: widget.index, status: Status.Inprogress);
     Navigator.pop(context);
   }
 
@@ -48,7 +54,7 @@ class _AlertdetailscreenState extends State<Alertdetailscreen> {
               ),
             ),
             SizedBox(height: 20),
-            Alertdetailcard(),
+            Alertdetailcard(alert: widget.alert),
             SizedBox(height: 20),
 
             Row(

@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:my_app/model/alert.dart';
 
 class Alertdetailcard extends StatelessWidget {
-  const Alertdetailcard({super.key});
+  Alertdetailcard({super.key, required this.alert});
+  Alert alert;
+
+  Color getColor() {
+    if (alert.ristLevel == RiskLevel.High)
+      return Color.fromARGB(255, 255, 64, 64);
+
+    if (alert.ristLevel == RiskLevel.Meduim) return Colors.amber;
+
+    if (alert.ristLevel == RiskLevel.Critical) return Colors.red[900]!;
+
+    return Colors.grey;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +29,17 @@ class Alertdetailcard extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: .spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "Possible Brute Force",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              Text(alert.title, style: TextStyle(fontWeight: FontWeight.bold)),
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 255, 64, 64),
+                  color: getColor(),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Text(
-                  "High",
+                  alert.ristLevel.name,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -53,12 +63,12 @@ class Alertdetailcard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                DateFormat('HH:mm').format(DateTime.now()),
+                DateFormat('HH:mm').format(alert.detectAt),
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
 
               Text(
-                "Souce IP: 172.100.11.209",
+                "User : ${alert.user}",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
@@ -81,8 +91,9 @@ class Alertdetailcard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                "1. Brute force attack may occur\n"
-                "2. Try to check user account",
+                "Failed Attempts: ${alert.failAttempt}\n"
+                "Status: ${alert.status.name}\n"
+                "Website ID: ${alert.websiteId}",
 
                 style: TextStyle(fontSize: 11),
               ),
