@@ -5,14 +5,13 @@ import 'package:http/http.dart' as http;
 import 'package:my_app/data/DTO/alertDto.dart';
 import 'package:my_app/model/alert.dart';
 
-
 void main() async {
   ResposityAlert global = ResposityAlert.global;
   //  await global.Update(id: 2, status: Status.Inprogress);
   // print(result);
 
   Alert alert = Alert(
-    websiteId: "1",
+    websiteId: "site_001",
     threatType: ThreatType.BruteForce,
     title: "DDOS",
     failAttempt: 5,
@@ -46,16 +45,32 @@ class ResposityAlert {
     return result;
   }
 
-  Stream<List<Alert>> streamAlert() async* {
-  while (true) {
-    try {
-      yield await getAllAlert();
-    } catch (e) {
-      throw Exception("Failed: $e");
+  Stream<List<Alert>> streamAlertByWebsite(String websiteId) async* {
+    while (true) {
+      List<Alert> allAlerts = await getAllAlert();
+      List<Alert> result = [];
+
+      for (int i = 0; i < allAlerts.length; i++) {
+        if (allAlerts[i].websiteId == websiteId) {
+          result.add(allAlerts[i]);
+        }
+      }
+
+      yield result;
+      await Future.delayed(Duration(seconds: 1));
     }
-    await Future.delayed(Duration(seconds: 1));
   }
-}
+
+  //   Stream<List<Alert>> streamAlert() async* {
+  //   while (true) {
+  //     try {
+  //       yield await getAllAlert();
+  //     } catch (e) {
+  //       throw Exception("Failed: $e");
+  //     }
+  //     await Future.delayed(Duration(seconds: 1));
+  //   }
+  // }
 
   Future<void> createAlert(Alert alert, int id) async {
     Uri url = Uri.parse(
@@ -71,16 +86,15 @@ class ResposityAlert {
     );
   }
 
-  Future<void> Update({required int id ,required Status status}) async{
-    Uri url = Uri.parse("https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/Alert/alert_00${id}.json");
+  Future<void> Update({required int id, required Status status}) async {
+    Uri url = Uri.parse(
+      "https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/Alert/alert_00${id}.json",
+    );
 
     Response response = await http.patch(
       url,
-      headers: {"content-type":"application/json"},
-      body: jsonEncode({
-        "status": status.name
-      })
+      headers: {"content-type": "application/json"},
+      body: jsonEncode({"status": status.name}),
     );
-
   }
 }

@@ -52,13 +52,13 @@ class _UserScreenState extends State<UserScreen> {
         if(widget.user.selectedWebsite == null){
           return NoWebsiteScreen(onSelect: onWebsite,);
         }
-        return Alertscreen();
+        return Alertscreen(user: widget.user,);
 
       case AsynState.Home:
         return NoWebsiteScreen(onSelect: onWebsite,);
 
       case AsynState.Website:
-        return WebsiteScreen();
+        return WebsiteScreen(user:widget.user,);
 
       case AsynState.Profile:
         return Profilescreen();

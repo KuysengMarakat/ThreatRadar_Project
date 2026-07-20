@@ -1,30 +1,3 @@
-
-// List<Alert> Highfilter(){
-//   List<Alert> High = [];
-//   for (int i=0 ; i< fakeAlerts.length ; i++){
-//     if(fakeAlerts[i].ristLevel == RiskLevel.High){
-//       High.add(fakeAlerts[i]);
-//     }}
-//   return High;
-// }
-
-// List<Alert> Meduimfilter(){
-//   List<Alert> Meduim = [];
-//   for (int i=0 ; i< fakeAlerts.length ; i++){
-//     if(fakeAlerts[i].ristLevel == RiskLevel.Meduim){
-//       Meduim.add(fakeAlerts[i]);
-//     }}
-//   return Meduim;
-// }
-// List<Alert> Criticalfilter(){
-//   List<Alert> Critical = [];
-//   for (int i=0 ; i< fakeAlerts.length ; i++){
-//     if(fakeAlerts[i].ristLevel == RiskLevel.Critical){
-//       Critical.add(fakeAlerts[i]);
-//     }}
-//   return Critical;
-// }
-
 import 'package:my_app/data/repo/Resposity_Alert.dart';
 import 'package:my_app/model/alert.dart';
 
@@ -32,51 +5,15 @@ class AlertFilter {
   static AlertFilter alertFilterGlobal = AlertFilter();
   ResposityAlert resposityAlert = ResposityAlert.global;
 
-  Future<List<Alert>> Highfilter() async {
-    List<Alert> result = await resposityAlert.getAllAlert();
-    List<Alert> High = [];
-
-    for (int i = 0; i < result.length; i++) {
-      if (result[i].ristLevel == RiskLevel.High) {
-        High.add(result[i]);
-      }
-    }
-
-    return High;
-  }
-
-  Future<List<Alert>> Meduimfilter() async {
-    List<Alert> result = await resposityAlert.getAllAlert();
-    List<Alert> Meduim = [];
-
-    for (int i = 0; i < result.length; i++) {
-      if (result[i].ristLevel == RiskLevel.Meduim) {
-        Meduim.add(result[i]);
-      }
-    }
-
-    return Meduim;
-  }
-
-  Future<List<Alert>> Criticalfilter() async {
-    List<Alert> result = await resposityAlert.getAllAlert();
-    List<Alert> Critical = [];
-
-    for (int i = 0; i < result.length; i++) {
-      if (result[i].ristLevel == RiskLevel.Critical) {
-        Critical.add(result[i]);
-      }
-    }
-
-    return Critical;
-  }
-
-  Future<List<Alert>> Allfilter() async {
-    List<Alert> result = await resposityAlert.getAllAlert();
+ 
   
-
-   
-
+  List<Alert> filterByRisk(List<Alert> alerts, RiskLevel risk) {
+    List<Alert> result = [];
+    for (int i = 0; i < alerts.length; i++) {
+      if (alerts[i].ristLevel == risk) {
+        result.add(alerts[i]);
+      }
+    }
     return result;
   }
 }

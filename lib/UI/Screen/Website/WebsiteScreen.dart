@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/UI/Card/Websitecard.dart';
 import 'package:my_app/data/repo/Responsity_website.dart';
+import 'package:my_app/data/repo/UserReposity.dart';
 import 'package:my_app/model/web.dart';
 
 class WebsiteScreen extends StatefulWidget {
-  const WebsiteScreen({super.key});
+  WebsiteScreen({super.key,required this.user});
+
+  UserReposity user;
 
   @override
   State<WebsiteScreen> createState() => _WebsiteScreenState();
@@ -67,7 +70,7 @@ class _WebsiteScreenState extends State<WebsiteScreen> {
           padding: EdgeInsets.all(20),
           child: ListView.builder(
             itemCount: allWeb.length,
-            itemBuilder: (context, index) => WebsiteCard(website: allWeb[index],),
+            itemBuilder: (context, index) => WebsiteCard(website: allWeb[index],user: widget.user,),
           ),
         );
       case Asynstate.Error:

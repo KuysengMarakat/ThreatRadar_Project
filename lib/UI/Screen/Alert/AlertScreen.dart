@@ -3,6 +3,7 @@ import 'package:my_app/UI/Card/AlertCard.dart';
 import 'package:my_app/UI/widgets/filter.dart';
 import 'package:my_app/data/Service/alert_filter.dart';
 import 'package:my_app/data/repo/Resposity_Alert.dart';
+import 'package:my_app/data/repo/UserReposity.dart';
 import 'package:my_app/model/alert.dart';
 
 // void main() {
@@ -10,56 +11,55 @@ import 'package:my_app/model/alert.dart';
 // }
 
 class Alertscreen extends StatefulWidget {
-  const Alertscreen({super.key});
+  Alertscreen({super.key, required this.user});
+  UserReposity user;
 
   @override
   State<Alertscreen> createState() => _AlertscreenState();
 }
 
+
 enum FilterType { All, High, Meduim, Critical }
 
 enum Asynstate { Loading, Successful, Error }
 
+
 class _AlertscreenState extends State<Alertscreen> {
   ResposityAlert resposityAlert = ResposityAlert.global;
-
-  AlertFilter alertFilter = AlertFilter.alertFilterGlobal;
-
   FilterType filterType = FilterType.All;
-
+  AlertFilter alertFilter = AlertFilter.alertFilterGlobal;
+  
+  List<Alert> allAlerts = [];  
   List<Alert> filter = [];
-
   Asynstate asynState = Asynstate.Loading;
 
-  void onAll() async {
-    List<Alert> result = await alertFilter.Allfilter();
+  String? get siteId => widget.user.selectedWebsite;
+
+  
+  void onAll() {
     setState(() {
       filterType = FilterType.All;
-      filter = result;
+
     });
   }
 
-  void onMeduim() async {
-    List<Alert> result = await alertFilter.Meduimfilter();
-    setState(() {
-      filterType = FilterType.Meduim;
-      filter = result;
-    });
-  }
-
-  void onHigh() async {
-    List<Alert> result = await alertFilter.Highfilter();
+  void onHigh() {
     setState(() {
       filterType = FilterType.High;
-      filter = result;
     });
   }
 
-  void onCritical() async {
-    List<Alert> result = await alertFilter.Criticalfilter();
+  void onMeduim() {
+    setState(() {
+      filterType = FilterType.Meduim;
+   
+    });
+  }
+
+  void onCritical() {
     setState(() {
       filterType = FilterType.Critical;
-      filter = result;
+    
     });
   }
 
@@ -72,11 +72,29 @@ class _AlertscreenState extends State<Alertscreen> {
   void fectData() {
     asynState = Asynstate.Loading;
     setState(() {});
-
-    resposityAlert.streamAlert().listen(
+    
+    String? siteId = widget.user.selectedWebsite;
+    if (siteId == null) {
+      setState(() => asynState = Asynstate.Error);
+      return;
+    }
+    
+    resposityAlert.streamAlertByWebsite(siteId).listen(
       (alerts) {
         setState(() {
-          filter = alerts;
+          allAlerts = alerts;  
+          
+          
+          if (filterType == FilterType.All) {
+            filter = alerts;
+          } else if (filterType == FilterType.High) {
+            filter =  alertFilter.filterByRisk(alerts, RiskLevel.High);
+          } else if (filterType == FilterType.Meduim) {
+            filter = alertFilter.filterByRisk(alerts, RiskLevel.Meduim);
+          } else if (filterType == FilterType.Critical) {
+            filter = alertFilter.filterByRisk(alerts, RiskLevel.Critical);
+          }
+          
           asynState = Asynstate.Successful;
         });
       },
@@ -92,14 +110,16 @@ class _AlertscreenState extends State<Alertscreen> {
     switch (asynState) {
       case Asynstate.Loading:
         return Center(child: CircularProgressIndicator());
-
       case Asynstate.Successful:
         return ListView.builder(
           itemCount: filter.length,
-          itemBuilder: (context, index) => Alertcard(alert: filter[index],index: index,),
+          itemBuilder: (context, index) => Alertcard(
+            alert: filter[index],
+            index: index,
+          ),
         );
       case Asynstate.Error:
-        return Center(child: Text("Can't Fectch Data"));
+        return Center(child: Text("Can't Fetch Data"));
     }
   }
 
@@ -115,7 +135,6 @@ class _AlertscreenState extends State<Alertscreen> {
             onMeduim: onMeduim,
             onCritical: onCritical,
           ),
-
           Expanded(child: content),
         ],
       ),
