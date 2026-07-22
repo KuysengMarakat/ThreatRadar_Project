@@ -5,10 +5,11 @@ import 'package:my_app/data/repo/UserReposity.dart';
 import 'package:my_app/model/web.dart';
 
 class WebsiteScreen extends StatefulWidget {
-  WebsiteScreen({super.key,required this.user});
+  WebsiteScreen({super.key,required this.user,required this.onSelect});
 
   UserReposity user;
-
+  
+  VoidCallback onSelect;
   @override
   State<WebsiteScreen> createState() => _WebsiteScreenState();
 }
@@ -20,6 +21,7 @@ class _WebsiteScreenState extends State<WebsiteScreen> {
   List<Website> allWeb = [];
   Asynstate state = Asynstate.Loading;
 
+  
   void initState() {
     super.initState();
 
@@ -70,7 +72,7 @@ class _WebsiteScreenState extends State<WebsiteScreen> {
           padding: EdgeInsets.all(20),
           child: ListView.builder(
             itemCount: allWeb.length,
-            itemBuilder: (context, index) => WebsiteCard(website: allWeb[index],user: widget.user,),
+            itemBuilder: (context, index) => WebsiteCard(website: allWeb[index],user: widget.user,onSelect: widget.onSelect,),
           ),
         );
       case Asynstate.Error:

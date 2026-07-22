@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/UI/Card/HomeCard.dart';
+import 'package:my_app/UI/Screen/HomeScreen/SelectedScreen.dart';
 import 'package:my_app/UI/Screen/Website/AddWebsiteScreen.dart';
 import 'package:my_app/UI/Screen/Alert/AlertScreen.dart';
-import 'package:my_app/UI/Card/HomeScreen.dart';
+import 'package:my_app/UI/Screen/HomeScreen/NoselectScreen.dart';
 import 'package:my_app/UI/Screen/Profile/ProfileScreen.dart';
 import 'package:my_app/UI/Screen/Website/WebsiteScreen.dart';
 import 'package:my_app/UI/widgets/Button_Navigaion_Bar.dart';
 import 'package:my_app/UI/widgets/app_Bar.dart';
 import 'package:my_app/data/repo/UserReposity.dart';
 import 'package:my_app/model/web.dart';
+import 'package:my_app/data/repo/Responsity_website.dart';
 
 class UserScreen extends StatefulWidget {
   UserScreen({super.key, required this.user});
   UserReposity user;
-
+ 
+  
   @override
   State<UserScreen> createState() => _UserScreenState();
 }
@@ -23,15 +25,6 @@ enum AsynState { Home, Alert, Website, Profile }
 class _UserScreenState extends State<UserScreen> {
   AsynState asynState = AsynState.Home;
 
-  List<Website> allWeb = [
-    Website(
-      id: "site_001",
-      name: "KhmerCharm",
-      url: "https://network-design-project.vercel.app/",
-      status: "active",
-      addTime: DateTime.parse("2026-07-07T21:00:00.000Z"),
-    ),
-  ];
 
   void onHome() {
     setState(() {
@@ -68,16 +61,18 @@ class _UserScreenState extends State<UserScreen> {
       case AsynState.Home:
         if (widget.user.selectedWebsite == null) {
           return NoWebisteCard(onSelect: onWebsite);
-        }
-        return HomeCard(
-          website: allWeb[0],
-          unresolvedAlerts: 1,
+        }else{
+           return HomeCard(
+          websiteId: widget.user.selectedWebsite!,
           onViewAlerts: onAlert,
-          onSwitchWebsite: onWebsite,
-        );
+     
+          onSwitchWebsite: onWebsite,   );
+        }
+       
+        
 
       case AsynState.Website:
-        return WebsiteScreen(user: widget.user);
+        return WebsiteScreen(user: widget.user,onSelect: onHome,);
 
       case AsynState.Profile:
         return Profilescreen();

@@ -15,13 +15,35 @@ class _LoginscreenState extends State<Loginscreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   bool isHide = false;
+  String errorMessage="";
 
   void Login() async {
+    if (email.text.isEmpty && password.text.isEmpty) {
+      setState(() {
+        errorMessage = "Please enter email and password";
+      });
+      return;
+    }
+    if (email.text.isEmpty) {
+      setState(() {
+        errorMessage = "Please enter email and password";
+      });
+      return;
+    }
+    if (password.text.isEmpty) {
+      setState(() {
+        errorMessage = "Please enter your password";
+      });
+
+      return;
+    }
     try {
       await widget.user.Login(email: email.text, password: password.text);
       widget.onLogin();
     } catch (e) {
-      
+      setState(() {
+        errorMessage ="Login failed";
+      });
     }
   }
 
@@ -105,7 +127,7 @@ class _LoginscreenState extends State<Loginscreen> {
                     SizedBox(height: 10),
 
                     Row(
-                      mainAxisAlignment: .end,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
                           onPressed: () => {},
@@ -116,7 +138,12 @@ class _LoginscreenState extends State<Loginscreen> {
                         ),
                       ],
                     ),
-
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(errorMessage,style: TextStyle(color: Colors.red),),
+                      ],
+                    ),
                     SizedBox(height: 10),
 
                     SizedBox(

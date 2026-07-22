@@ -13,8 +13,7 @@ class Detector {
   Future<void> BruteForceRule() async {
     List<Alert> result = await alertRepo.getAllAlert();
     List<Log> AllLog = await Logrepo.getAllLog();
-    print(" 📊 Total alerts: ${result.length}");
-    print(" 📊 Total logs: ${AllLog.length}");
+    
 
     int alertId = result.length + 1;
 
@@ -62,7 +61,7 @@ class Detector {
           status: Status.New,
         );
         try {
-          await alertRepo.createAlert(alertNew, alertId);
+          await alertRepo.createAlert(alertNew, alertId+1);
           alertId++;
           print(email);
         } catch (e) {
@@ -123,7 +122,7 @@ class Detector {
           status: Status.New,
         );
         try {
-          await alertRepo.createAlert(alertNew, alertId);
+          await alertRepo.createAlert(alertNew, alertId+1);
           alertId++;
         } catch (e) {}
       }
@@ -180,9 +179,11 @@ class Detector {
           status: Status.New,
         );
         try {
-          await alertRepo.createAlert(alertNew, alertId);
+          await alertRepo.createAlert(alertNew, alertId+1);
           alertId++;
-        } catch (e) {}
+        } catch (e) {
+          
+        }
       }
     }
   }
@@ -213,7 +214,7 @@ class Detector {
           );
 
           try {
-            await alertRepo.createAlert(alertNew, alertId);
+            await alertRepo.createAlert(alertNew, alertId+1);
             alertId++;
           } catch (e) {
             print(e);
@@ -238,9 +239,4 @@ class Detector {
       await Future.delayed(Duration(minutes: 5));
     }
   }
-}
-void main() async {
-
-await Detector.global.BruteForceRule();
-
 }

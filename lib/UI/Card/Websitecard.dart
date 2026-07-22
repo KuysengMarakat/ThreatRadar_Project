@@ -3,31 +3,41 @@ import 'package:my_app/data/repo/UserReposity.dart';
 import 'package:my_app/model/web.dart';
 
 class WebsiteCard extends StatefulWidget {
-  WebsiteCard({super.key,required this.website,required this.user});
+  WebsiteCard({super.key,required this.website,required this.user,required this.onSelect});
   Website website;
   UserReposity user;
+  VoidCallback onSelect;
 
   @override
   State<WebsiteCard> createState() => _WebsiteCardState();
 }
 
 class _WebsiteCardState extends State<WebsiteCard> {
+  
   void onSelect(){
     setState(() {
       widget.user.selectedWebsite = widget.website.id;
+        
     });
+    widget.onSelect();
   }
+
+
+
+
   @override
   Widget build(BuildContext context) {
+    
     return GestureDetector(
       
-      onTap: onSelect,
+      onTap: onSelect ,
       child: Container(
         margin: EdgeInsets.all(8),
         height: 100,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),
+          
         ),
         child: Center(
           child: ListTile(

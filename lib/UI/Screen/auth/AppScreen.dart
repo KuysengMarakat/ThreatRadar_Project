@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/UI/Screen/auth/LoginScreen.dart';
 import 'package:my_app/UI/Screen/auth/UserScreen.dart';
 import 'package:my_app/data/Service/detector.dart';
+import 'package:my_app/data/repo/Responsity_website.dart';
 import 'package:my_app/data/repo/UserReposity.dart';
 
 class Appscreen extends StatefulWidget {
@@ -13,6 +14,8 @@ class Appscreen extends StatefulWidget {
 
 class _AppscreenState extends State<Appscreen> {
   UserReposity global = UserReposity.instance;
+ 
+  
 
   void onLogin() {
     setState(() {});
@@ -26,9 +29,9 @@ class _AppscreenState extends State<Appscreen> {
   }
 
   void _startDetection() {
-    print("🚀 Starting auto-detection...");
+    
     Detector.global.streamDetection().listen((_) {
-      print("🔍 Detection check completed");
+    
     });
   }
 
