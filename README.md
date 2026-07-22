@@ -126,7 +126,7 @@ The brute force detection algorithm:
 Allows administrators to sign in using email and password.
 
 ### 2. Dashboard Screen
-Displays overview of active threats, monitored websites, and recent activity.
+Display the current webstie monitor
 
 ### 3. Alerts Screen
 Shows all threat alerts with severity filters (All, High, Medium, Low).
