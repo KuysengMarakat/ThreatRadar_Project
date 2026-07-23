@@ -91,6 +91,14 @@ class ResponsityWebsite {
    return true;
   }
 
+  Future<void> deleteWebsite(int siteId) async{
+    Uri url = Uri.parse("https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/Websites/$siteId.json");
+    Response response = await http.delete(
+      url
+      );
+    
+  }
+
   
 }
 

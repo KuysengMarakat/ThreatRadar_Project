@@ -37,10 +37,7 @@ class _ProfilescreenState extends State<Profilescreen> {
               child: Column(
                 children: [
                   ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      maxRadius: 25,
-                    ),
+                    
                     title: Text(
                       "Profile",
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -49,10 +46,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                   ),
                   SizedBox(height: 10),
                   ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      maxRadius: 25,
-                    ),
+                    
                     title: Text(
                       "Change Password",
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -61,10 +55,7 @@ class _ProfilescreenState extends State<Profilescreen> {
                   ),
                   SizedBox(height: 10),
                   ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      maxRadius: 25,
-                    ),
+                    
                     title: Text(
                       "Manage Admin",
                       style: TextStyle(fontWeight: FontWeight.bold),

@@ -52,10 +52,17 @@ class _WebsiteCardState extends State<WebsiteCard> {
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.green,
               ),
-              child: Text(
-                widget.website.status,
-                style: TextStyle(color: Colors.white),
-                textAlign: TextAlign.center,
+              child: Column(
+                children: [
+                  
+                  Text(
+                    widget.website.status,
+                    style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
+                  ),
+
+                  IconButton(onPressed: ()=>{}, icon: Icon(Icons.delete)),
+                ],
               ),
             ),
           ),
