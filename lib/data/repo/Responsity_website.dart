@@ -60,7 +60,10 @@ class ResponsityWebsite {
     }
   }
 
-  Future<bool> addWebsite({required String name,required String websiteUrl,}) async {
+  Future<bool> addWebsite({
+    required String name,
+    required String websiteUrl,
+  }) async {
     String status = "faild";
     List<Website> allWebsites = await getAllWebsite();
     int newNumber = allWebsites.length + 1;
@@ -69,42 +72,48 @@ class ResponsityWebsite {
     Uri firebaseUrl = Uri.parse(
       "https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/Websites/$siteId.json",
     );
+
+    if (!websiteUrl.startsWith("https") || !websiteUrl.contains(".")) {
+      return false;
+    }
     Uri webUrl = Uri.parse(websiteUrl);
-    Response webreponse = await http.get(webUrl);
-    if(webreponse.statusCode != 200) {
+    try {
+      Response webreponse = await http.get(webUrl);
+      if (webreponse.statusCode >= 400) {
+        return false;
+      }
+    } catch (e) {
+      print("PING FAILED: $e");
       return false;
     }
 
-   Website newWebsite =Website(
-    id: siteId,
-    name: name,
-    url: websiteUrl,
-    status: "active",
-    addTime: DateTime.now(),
-   );
+    Website newWebsite = Website(
+      id: siteId,
+      name: name,
+      url: websiteUrl,
+      status: "active",
+      addTime: DateTime.now(),
+    );
 
-   await http.put(
-    firebaseUrl,
-    headers: {"Content-Type": "application/json"},
-    body: jsonEncode(WebsiteDto.toJson(newWebsite)),
-   );
-   return true;
+    await http.put(
+      firebaseUrl,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(WebsiteDto.toJson(newWebsite)),
+    );
+    return true;
   }
 
-  Future<void> deleteWebsite(int siteId) async{
-    Uri url = Uri.parse("https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/Websites/$siteId.json");
-    Response response = await http.delete(
-      url
-      );
-    
+  Future<void> deleteWebsite(String siteId) async {
+    Uri url = Uri.parse(
+      "https://phneak-tep-default-rtdb.asia-southeast1.firebasedatabase.app/Websites/$siteId.json",
+    );
+    Response response = await http.delete(url);
   }
-
-  
 }
 
-void main () async{
+void main() async {
   ResponsityWebsite global = ResponsityWebsite.instance;
-  List <Website> r= await global.getAllWebsite();
+  List<Website> r = await global.getAllWebsite();
   print(r);
-  
+  global.deleteWebsite("site_004");
 }

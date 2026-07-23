@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/data/repo/Responsity_website.dart';
 import 'package:my_app/data/repo/UserReposity.dart';
 import 'package:my_app/model/web.dart';
 
@@ -13,6 +14,7 @@ class WebsiteCard extends StatefulWidget {
 }
 
 class _WebsiteCardState extends State<WebsiteCard> {
+  ResponsityWebsite global = ResponsityWebsite.instance;
   
   void onSelect(){
     setState(() {
@@ -23,7 +25,9 @@ class _WebsiteCardState extends State<WebsiteCard> {
   }
 
 
-
+  void onDelete() async{
+    await global.deleteWebsite(widget.website.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,25 +49,29 @@ class _WebsiteCardState extends State<WebsiteCard> {
               widget.website.name,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            trailing: Container(
-              width: 60,
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.green,
-              ),
-              child: Column(
-                children: [
-                  
-                  Text(
+            subtitle: Text(
+               widget.website.url,
+                style:TextStyle(color: Colors.black54, fontSize: 12),
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 60,
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.green,
+                  ),
+                  child: Text(
                     widget.website.status,
                     style: TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                   ),
-
-                  IconButton(onPressed: ()=>{}, icon: Icon(Icons.delete)),
-                ],
-              ),
+                ),
+             
+                IconButton(onPressed: onDelete, icon: Icon(Icons.delete)),
+              ],
             ),
           ),
         ),

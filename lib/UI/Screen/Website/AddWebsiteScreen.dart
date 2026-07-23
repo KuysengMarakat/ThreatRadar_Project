@@ -44,7 +44,7 @@ class _AddwebsitescreenState extends State<Addwebsitescreen> {
         );
       } else {
         message = Text(
-          "Website added successfully!",
+          "Website not reachable",
           style: TextStyle(color: Colors.red),
         );
       }
